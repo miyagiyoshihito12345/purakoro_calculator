@@ -7,16 +7,22 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "run-s \"lint:*\"",
-    "lint:oxlint": "oxlint . --fix",
-    "lint:eslint": "eslint . --fix --cache",
-    "format": "prettier --write --experimental-cli src/"
+    "test": "node --test",
+    "lint": "run-s \"lint:check:*\"",
+    "lint:check:oxlint": "oxlint . --deny-warnings",
+    "lint:check:eslint": "eslint . --max-warnings=0",
+    "lint:fix": "run-s \"lint:fix:*\"",
+    "lint:fix:oxlint": "oxlint . --fix",
+    "lint:fix:eslint": "eslint . --fix --cache",
+    "format": "prettier --write src/",
+    "format:check": "prettier --check src/"
   },
   "dependencies": {
     "vue": "^3.5.40"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@tailwindcss/vite": "^4.3.3",
     "@vitejs/plugin-vue": "^6.0.8",
     "eslint": "^10.7.0",
     "eslint-config-prettier": "^10.1.8",
@@ -26,8 +32,8 @@
     "npm-run-all2": "^9.0.2",
     "oxlint": "~1.73.0",
     "prettier": "3.9.5",
+    "tailwindcss": "^4.3.3",
     "vite": "^8.1.5",
-    "vite-plugin-vue-devtools": "^8.1.5",
     "vue-eslint-parser": "^10.4.1"
   },
   "engines": {

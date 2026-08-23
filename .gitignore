@@ -14,6 +14,9 @@ dist-ssr
 coverage
 *.local
 
+# 権利者提供の参照画像（ローカル確認用・公開物には含めない）
+/public/images/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
