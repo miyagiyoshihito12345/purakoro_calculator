@@ -1,0 +1,1047 @@
+{
+  "フシギダネ": {
+    "つるのムチ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "faceDown"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "はっぱカッター": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "やどりぎのタネ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "left", "right"],
+          "effect": "次の相手ターン：相手のエネコロ −1／次の自分ターン：自分のエネコロ +1"
+        }
+      ]
+    },
+    "くさむすび": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "faceDown"],
+          "effect": "次の相手ターン：選んだワザ1つを使用不可"
+        }
+      ]
+    },
+    "とつげき": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+40ダメージ"
+        },
+        {
+          "directions": ["upsideDown", "faceDown"],
+          "effect": "自分に30ダメージ"
+        }
+      ]
+    },
+    "ギガドレイン": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "HP40回復"
+        }
+      ]
+    },
+    "アシッドボム": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "アロマストーム": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand"],
+          "effect": "HP50回復"
+        }
+      ]
+    }
+  },
+  "ヒトカゲ": {
+    "ひのこ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+30ダメージ"
+        }
+      ]
+    },
+    "ヒートアップ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "次の自分ターン：自分のエネコロ +2"
+        }
+      ]
+    },
+    "かえんほうしゃ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+20ダメージ"
+        },
+        {
+          "directions": ["upsideDown", "faceDown", "left", "right"],
+          "effect": "次の自分ターン：自分のエネコロ −2"
+        }
+      ]
+    },
+    "ほのおのキバ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "faceDown"],
+          "effect": "+30ダメージ"
+        }
+      ]
+    },
+    "フレアストーム": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "与ダメージ：炎エネルギー数 ×10追加"
+        }
+      ]
+    },
+    "かみなりパンチ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "left", "right"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "メタルクロー": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand"],
+          "effect": "+40ダメージ"
+        }
+      ]
+    },
+    "フレイムアップ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand"],
+          "effect": "次の自分ターン：自分のエネコロ +2"
+        },
+        {
+          "directions": ["upsideDown"],
+          "effect": "次の自分ターン：自分のエネコロ −2"
+        }
+      ]
+    }
+  },
+  "ゼニガメ": {
+    "みずでっぽう": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceDown"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "からにこもる": {
+      "baseEffect": "次の相手ターン：自分の被ダメージ −20",
+      "coroEffects": [
+        {
+          "directions": ["faceDown"],
+          "effect": "HP30回復"
+        }
+      ]
+    },
+    "みずのはどう": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "シェルアタック": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "faceDown"],
+          "effect": "次の相手ターン：自分の被ダメージ −20"
+        }
+      ]
+    },
+    "バブルこうせん": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "faceDown"],
+          "effect": "次の相手ターン：相手のエネコロ −1"
+        }
+      ]
+    },
+    "ハイドロアンガー": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "faceDown"],
+          "effect": "自分の残りHP40以下：与ダメージ +60"
+        }
+      ]
+    },
+    "マッドショット": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "+30ダメージ"
+        }
+      ]
+    },
+    "カチカチこうら": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["faceDown"],
+          "effect": "次の相手ターン：自分の被ダメージ −50"
+        }
+      ]
+    }
+  },
+  "ピカチュウ": {
+    "かじる": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+30ダメージ"
+        }
+      ]
+    },
+    "でんきショック": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "left", "right"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "エレキラッシュ": {
+      "baseEffect": "弱点計算なし",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "「エレキラッシュ」再使用：失敗まで継続"
+        }
+      ]
+    },
+    "１０まんボルト": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "+30ダメージ"
+        },
+        {
+          "directions": ["upsideDown", "faceUp", "faceDown"],
+          "effect": "次の自分ターン：自分のエネコロ −2"
+        }
+      ]
+    },
+    "かみなり": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand"],
+          "effect": "+60ダメージ"
+        }
+      ]
+    },
+    "ボルテッカー": {
+      "baseEffect": "自分に30ダメージ",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "faceDown"],
+          "effect": "+40ダメージ"
+        }
+      ]
+    },
+    "アイアンテール": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "次の相手ターン：自分の被ダメージ −10"
+        }
+      ]
+    },
+    "クリティカルボルト": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand"],
+          "effect": "+60ダメージ"
+        }
+      ]
+    }
+  },
+  "イーブイ": {
+    "しっぽではたく": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "+10ダメージ"
+        }
+      ]
+    },
+    "たいあたり": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "left", "right"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "とっしん": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+20ダメージ"
+        },
+        {
+          "directions": ["upsideDown", "faceDown"],
+          "effect": "自分に20ダメージ"
+        }
+      ]
+    },
+    "はねまわる": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand"],
+          "effect": "+70ダメージ"
+        },
+        {
+          "directions": ["faceUp", "faceDown"],
+          "effect": "+40ダメージ"
+        },
+        {
+          "directions": ["upsideDown", "left", "right"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "ぜんりょくダッシュ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "faceDown"],
+          "effect": "+40ダメージ"
+        }
+      ]
+    },
+    "あまえる": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "left", "right"],
+          "effect": "次の相手ターン：相手のエネコロ −2"
+        }
+      ]
+    },
+    "かみつく": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    }
+  },
+  "ミュウ": {
+    "ねんりき": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "サイケこうせん": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "upsideDown"],
+          "effect": "+30ダメージ"
+        }
+      ]
+    },
+    "バリアー": {
+      "baseEffect": "次の相手ターン：自分の被ダメージ −20",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "自分の被ダメージ：さらに −30"
+        }
+      ]
+    },
+    "メモリースキップ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "次の相手ターン：選んだワザ1つを使用不可"
+        }
+      ]
+    },
+    "サイコショット": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "upsideDown", "faceUp", "faceDown"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "サイコキネシス": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "faceDown"],
+          "effect": "相手がエネコロ3個を振る：最多タイプ数 ×10ダメージ追加"
+        }
+      ]
+    },
+    "リフレクション": {
+      "baseEffect": "相手が選んだワザのダメージを相手に与える",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "与ダメージ2倍"
+        }
+      ]
+    }
+  },
+  "カイロス": {
+    "しゅうちゅう": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "次の自分ターン：自分のエネコロ +2"
+        }
+      ]
+    },
+    "たえる": {
+      "baseEffect": "次の相手ターン：自分の被ダメージ −20",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "faceDown"],
+          "effect": "自分の被ダメージ：さらに −20"
+        }
+      ]
+    },
+    "つのでたたく": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "+30ダメージ"
+        }
+      ]
+    },
+    "ハサミギロチン": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand"],
+          "effect": "+150ダメージ"
+        }
+      ]
+    },
+    "かわらわり": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "チャージばさみ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "次の自分ターン：自分のエネコロ +1"
+        }
+      ]
+    },
+    "ぎゃくじょうスイング": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "前の自分ターンにエネコロ失敗：与ダメージ +40"
+        }
+      ]
+    },
+    "とつげき": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+20ダメージ"
+        },
+        {
+          "directions": ["upsideDown", "faceDown"],
+          "effect": "自分に20ダメージ"
+        }
+      ]
+    },
+    "ひっさつばさみ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand"],
+          "effect": "+80ダメージ"
+        }
+      ]
+    },
+    "じごくぐるま": {
+      "baseEffect": "自分の被ダメージ +20",
+      "coroEffects": [
+        {
+          "directions": ["stand", "upsideDown", "faceUp", "faceDown"],
+          "effect": "+30ダメージ"
+        }
+      ]
+    }
+  },
+  "ファイヤー": {
+    "ほのおのつばさ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+30ダメージ"
+        },
+        {
+          "directions": ["left", "right"],
+          "effect": "自分に20ダメージ"
+        }
+      ]
+    },
+    "ねっぷう": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "かえんほうしゃ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+40ダメージ"
+        },
+        {
+          "directions": ["upsideDown", "faceDown", "left", "right"],
+          "effect": "次の自分ターン：自分のエネコロ −2"
+        }
+      ]
+    },
+    "フレアドライブ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "faceDown"],
+          "effect": "+40ダメージ"
+        },
+        {
+          "directions": ["upsideDown", "left", "right"],
+          "effect": "自分に40ダメージ"
+        }
+      ]
+    },
+    "ぼうふう": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand"],
+          "effect": "+60ダメージ"
+        }
+      ]
+    },
+    "ヒートブレス": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+40ダメージ"
+        },
+        {
+          "directions": ["upsideDown", "faceDown"],
+          "effect": "自分に30ダメージ"
+        }
+      ]
+    },
+    "もえつきる": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["faceUp", "faceDown", "upsideDown"],
+          "effect": "ワザ失敗"
+        }
+      ]
+    },
+    "ウイングラッシュ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "left", "right"],
+          "effect": "+10ダメージ"
+        }
+      ]
+    },
+    "ほのおのうず": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+40ダメージ"
+        },
+        {
+          "directions": ["upsideDown", "faceDown", "left", "right"],
+          "effect": "次の自分ターン：自分のエネコロ −2"
+        }
+      ]
+    },
+    "そらをとぶ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "次の相手ターン：自分のワザ被ダメージ 0"
+        },
+        {
+          "directions": ["upsideDown", "faceUp", "faceDown"],
+          "effect": "ワザ失敗"
+        }
+      ]
+    }
+  },
+  "フリーザー": {
+    "フリーズダイブ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "アイスショット": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "コールドブレス": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "次の相手ターン：相手のエネコロ −2"
+        }
+      ]
+    },
+    "ぜったいれいど": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "次の相手ターン：相手のエネコロ −2／キャラコロ使用不可"
+        }
+      ]
+    },
+    "そらをとぶ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "次の相手ターン：自分のワザ被ダメージ 0"
+        },
+        {
+          "directions": ["upsideDown", "faceUp", "faceDown"],
+          "effect": "ワザ失敗"
+        }
+      ]
+    },
+    "アイスウイング": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "left", "right"],
+          "effect": "次の相手ターン：相手のエネコロ −1"
+        }
+      ]
+    },
+    "いてつくやいば": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "次の相手ターン：相手はキャラコロ使用不可"
+        }
+      ]
+    },
+    "ブリザードストーム": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "left", "right"],
+          "effect": "+30ダメージ"
+        }
+      ]
+    },
+    "エアカッター": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+30ダメージ"
+        }
+      ]
+    },
+    "はねやすめ": {
+      "baseEffect": "自分のHP +20",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "自分のHP：さらに +20"
+        }
+      ]
+    }
+  },
+  "サンダー": {
+    "でんじフラッシュ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+30ダメージ"
+        }
+      ]
+    },
+    "でんきショック": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "left", "right"],
+          "effect": "+10ダメージ"
+        }
+      ]
+    },
+    "ボルトラッシュ": {
+      "baseEffect": "キャラコロ：合計3回",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "キャラコロ成功1回につき：与ダメージ +30"
+        }
+      ]
+    },
+    "つばめがえし": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "バリバリウイング": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "+40ダメージ"
+        }
+      ]
+    },
+    "サンダーチェイン": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "faceDown"],
+          "effect": "与ダメージ +30／キャラコロ再振り：失敗まで継続"
+        }
+      ]
+    },
+    "ほうでん": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "faceDown"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "エレキアロー": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand"],
+          "effect": "+40ダメージ"
+        }
+      ]
+    },
+    "ダブルサンダー": {
+      "baseEffect": "キャラコロ：合計2回",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "faceDown"],
+          "effect": "キャラコロ成功1回につき：与ダメージ +20"
+        }
+      ]
+    },
+    "そらをとぶ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "次の相手ターン：自分のワザ被ダメージ 0"
+        },
+        {
+          "directions": ["upsideDown", "faceUp", "faceDown"],
+          "effect": "ワザ失敗"
+        }
+      ]
+    }
+  },
+  "イワーク": {
+    "ぶつかる": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "faceDown"],
+          "effect": "+10ダメージ"
+        }
+      ]
+    },
+    "いわなだれ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "ワイルドタックル": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+20ダメージ"
+        },
+        {
+          "directions": ["upsideDown", "faceDown", "left", "right"],
+          "effect": "自分に20ダメージ"
+        }
+      ]
+    },
+    "がんせきバリア": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "次の相手ターン：自分の被ダメージ −50"
+        }
+      ]
+    },
+    "アイアンテール": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "次の相手ターン：自分の被ダメージ −10"
+        }
+      ]
+    },
+    "がんせきタックル": {
+      "baseEffect": "次の相手ターン：自分の被ダメージ −10",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "自分の被ダメージ：さらに −20"
+        }
+      ]
+    },
+    "いわおとし": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+30ダメージ"
+        }
+      ]
+    },
+    "ロックウォール": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "left", "right"],
+          "effect": "次の相手ターン：自分の被ダメージ −30"
+        }
+      ]
+    },
+    "ハードインパクト": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "+30ダメージ"
+        },
+        {
+          "directions": ["upsideDown"],
+          "effect": "次の自分ターン：自分のエネコロ −1"
+        }
+      ]
+    },
+    "ジャイロボール": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "left", "right"],
+          "effect": "相手も振り、相手が下/後なら+60"
+        }
+      ]
+    }
+  },
+  "ベトベター": {
+    "どくガス": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "次の相手ターン：相手のエネコロ −1"
+        }
+      ]
+    },
+    "ベトベトなげ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "+20ダメージ"
+        }
+      ]
+    },
+    "どくどくヒール": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "left", "right"],
+          "effect": "前の自分ターンに「どくガス」成功：自分のHP +30"
+        }
+      ]
+    },
+    "ヘドロでかこむ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "faceDown"],
+          "effect": "次の相手ターン：選んだワザ1つを使用不可"
+        }
+      ]
+    },
+    "ベノムパンチ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp"],
+          "effect": "+30ダメージ"
+        }
+      ]
+    },
+    "ベノムスリップ": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "left", "right"],
+          "effect": "相手もキャラコロを振る：逆立ち・うつぶせ・横向きなら与ダメージ +20"
+        }
+      ]
+    },
+    "どくどくボンバー": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "faceUp", "faceDown"],
+          "effect": "前の自分ターンに「どくガス」成功：与ダメージ +30"
+        }
+      ]
+    },
+    "ヘドロタックル": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "+40ダメージ"
+        },
+        {
+          "directions": ["upsideDown", "faceUp", "faceDown"],
+          "effect": "自分に20ダメージ"
+        }
+      ]
+    },
+    "いやがらせベノム": {
+      "baseEffect": "",
+      "coroEffects": [
+        {
+          "directions": ["stand", "left", "right"],
+          "effect": "前の相手ターンにエネコロ失敗：与ダメージ +50"
+        }
+      ]
+    }
+  }
+}
