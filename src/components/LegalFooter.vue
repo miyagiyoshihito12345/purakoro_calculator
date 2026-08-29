@@ -1,3 +1,7 @@
+<script setup>
+import { trackEvent } from '../utils/analytics'
+</script>
+
 <template>
   <footer class="border-t border-slate-200 bg-white px-4 py-8 text-slate-600">
     <div class="mx-auto max-w-6xl">
@@ -9,6 +13,7 @@
           href="https://docs.google.com/forms/d/e/1FAIpQLScttLSOKQYnG59XoeUfwC_PvagUfAanxhrlBDhxoC6sCj-fPg/viewform"
           target="_blank"
           rel="noopener noreferrer"
+          @click="trackEvent('contact_clicked')"
         >
           お問い合わせフォーム
           <span class="ml-1" aria-hidden="true">↗</span>

@@ -15,7 +15,7 @@ const open = ref(false)
 const listId = useId()
 
 function choose(option) {
-  model.value = option
+  if (option !== model.value) model.value = option
   open.value = false
 }
 

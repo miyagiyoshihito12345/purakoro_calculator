@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue'
+import { trackCalculatorInteraction } from '../utils/analytics'
 import { successProbabilities } from '../utils/probability'
 import { nextTurnEnergyCoroIncrease } from '../utils/moves'
 import EnergyCustomizer from './EnergyCustomizer.vue'
@@ -55,6 +56,13 @@ function updateFace(coroIndex, faceIndex, value) {
     nextCoro[faceIndex] = value
     return nextCoro
   })
+
+  trackCalculatorInteraction('energy_changed', {
+    character_id: props.character.id,
+    coro_number: coroIndex + 1,
+    face_number: faceIndex + 1,
+    energy_face: value,
+  })
 }
 </script>
 
@@ -107,7 +115,7 @@ function updateFace(coroIndex, faceIndex, value) {
         :id="`character-${character.id}`"
         class="space-y-4 p-3 sm:space-y-8 sm:p-6 lg:p-8"
       >
-        <MoveSelector v-model="moveSlots" :moves="character.moves" />
+        <MoveSelector v-model="moveSlots" :character-id="character.id" :moves="character.moves" />
 
         <EnergyCustomizer :energy-coros="energyCoros" @update-face="updateFace" />
 

@@ -1,9 +1,11 @@
 <script setup>
 import { computed, ref } from 'vue'
+import { trackCalculatorInteraction } from '../utils/analytics'
 import MoveCardGrid from './MoveCardGrid.vue'
 import MoveTextCard from './MoveTextCard.vue'
 
 const props = defineProps({
+  characterId: { type: String, required: true },
   moves: { type: Array, required: true },
 })
 
@@ -32,10 +34,21 @@ function toggleSlot(index) {
 }
 
 function selectMove(slotIndex, moveId) {
+  if (moveSlots.value[slotIndex] === moveId) {
+    openSlotIndex.value = null
+    return
+  }
+
   const nextMoveSlots = [...moveSlots.value]
   nextMoveSlots[slotIndex] = moveId
   moveSlots.value = nextMoveSlots
   openSlotIndex.value = null
+
+  trackCalculatorInteraction('move_changed', {
+    character_id: props.characterId,
+    slot_number: slotIndex + 1,
+    move_id: moveId,
+  })
 }
 </script>
 
