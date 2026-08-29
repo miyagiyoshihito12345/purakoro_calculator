@@ -14,7 +14,6 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  min-width: 320px;
   min-height: 100vh;
   margin: 0;
 }
@@ -32,4 +31,29 @@ select:focus-visible,
 a:focus-visible {
   outline: 3px solid #2563a6;
   outline-offset: 3px;
+}
+
+.accordion-enter-active,
+.accordion-leave-active {
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+  transform-origin: top;
+}
+
+.accordion-enter-from,
+.accordion-leave-to {
+  opacity: 0;
+  transform: translateY(-6px) scaleY(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .accordion-enter-active,
+  .accordion-leave-active {
+    transition: none;
+  }
 }

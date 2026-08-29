@@ -3,7 +3,7 @@
     <div class="mx-auto max-w-6xl">
       <div class="text-center">
         <p class="text-sm font-black text-[#17233c]">プラコロ電卓</p>
-        <p class="mt-1 text-xs font-bold">個人が運営する非公式の確率計算ツールです。</p>
+        <p class="mt-1 text-xs font-bold">個人が運営する非公式のワザ成功確率計算ツールです。</p>
         <a
           class="mt-4 inline-flex items-center justify-center rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-black text-[#2563a6] transition hover:border-blue-300 hover:bg-blue-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563a6]"
           href="https://docs.google.com/forms/d/e/1FAIpQLScttLSOKQYnG59XoeUfwC_PvagUfAanxhrlBDhxoC6sCj-fPg/viewform"
@@ -58,7 +58,35 @@
               <li>
                 選択したキャラクター、ワザカード、エネコロおよび計算結果はブラウザ内で処理され、サーバーへ送信または永続保存されません。
               </li>
-              <li>本ツール独自のCookie、アクセス解析、広告配信ツールは使用していません。</li>
+              <li>
+                本ツールでは、利用状況の把握およびサービス改善のため、Google
+                Analyticsを使用しています。Google
+                AnalyticsはCookie等を利用し、閲覧したページ、参照元、利用環境、アクセス日時、操作状況等の情報を収集する場合があります。収集された情報はGoogleへ送信され、
+                <a
+                  class="font-bold text-[#2563a6] underline hover:text-blue-500"
+                  href="https://policies.google.com/privacy?hl=ja"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Googleのプライバシーポリシー</a
+                >および
+                <a
+                  class="font-bold text-[#2563a6] underline hover:text-blue-500"
+                  href="https://marketingplatform.google.com/about/analytics/terms/jp/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Google Analytics利用規約</a
+                >に基づいて取り扱われます。
+              </li>
+              <li>
+                Google Analyticsによるデータ収集は、ブラウザのCookie設定または
+                <a
+                  class="font-bold text-[#2563a6] underline hover:text-blue-500"
+                  href="https://tools.google.com/dlpage/gaoptout?hl=ja"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Google Analyticsオプトアウトアドオン</a
+                >を利用して無効にできます。本ツールでは広告配信ツールを使用していません。
+              </li>
               <li>
                 お問い合わせにはGoogleフォームを使用しています。フォームに入力された情報は、お問い合わせへの回答および必要な対応のために利用します。Googleによる情報の取り扱いについては、Googleが定めるプライバシーポリシーが適用されます。
               </li>
@@ -75,7 +103,7 @@
               </li>
               <li>外部サイトでは、各サイトが定めるプライバシーポリシーが適用されます。</li>
             </ul>
-            <p class="mt-3 text-slate-500">制定日：2026年8月23日</p>
+            <p class="mt-3 text-slate-500">制定日：2026年8月23日　改定日：2026年8月29日</p>
           </div>
         </details>
 
