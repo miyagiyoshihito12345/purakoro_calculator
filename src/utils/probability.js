@@ -10,6 +10,19 @@ function combinations(items, count) {
   )
 }
 
+function combinationsWithReplacement(items, count, startIndex = 0) {
+  if (count === 0) return [[]]
+
+  return items
+    .slice(startIndex)
+    .flatMap((item, offset) =>
+      combinationsWithReplacement(items, count - 1, startIndex + offset).map((rest) => [
+        item,
+        ...rest,
+      ]),
+    )
+}
+
 export function validateEnergyCoros(energyCoros) {
   if (!Array.isArray(energyCoros) || energyCoros.length !== 3) {
     throw new TypeError('energyCoros must contain exactly 3 coros')
@@ -81,7 +94,7 @@ export function maxSuccessProbability(energyCoros, requiredEnergies, diceCount) 
   const coroCombinations =
     diceCount <= 3
       ? combinations(energyCoros, diceCount)
-      : combinations(energyCoros, diceCount - 3).map((additional) => [
+      : combinationsWithReplacement(energyCoros, diceCount - 3).map((additional) => [
           ...energyCoros,
           ...additional,
         ])

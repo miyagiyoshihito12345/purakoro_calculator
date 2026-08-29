@@ -39,15 +39,15 @@
 
 ## 技術スタック
 
-| 分類 | 技術 |
-| --- | --- |
-| UI | Vue 3（Composition API、`<script setup>`） |
-| ビルド | Vite 8 |
-| スタイル | Tailwind CSS 4 |
-| テスト | Node.js Test Runner |
-| 静的解析 | ESLint、Oxlint |
-| フォーマット | Prettier |
-| デプロイ | GitHub Actions、GitHub Pages |
+| 分類         | 技術                                       |
+| ------------ | ------------------------------------------ |
+| UI           | Vue 3（Composition API、`<script setup>`） |
+| ビルド       | Vite 8                                     |
+| スタイル     | Tailwind CSS 4                             |
+| テスト       | Node.js Test Runner                        |
+| 静的解析     | ESLint、Oxlint                             |
+| フォーマット | Prettier                                   |
+| デプロイ     | GitHub Actions、GitHub Pages               |
 
 ## 必要環境
 
@@ -65,16 +65,16 @@ npm run dev
 
 ## npm scripts
 
-| コマンド | 内容 |
-| --- | --- |
-| `npm run dev` | 開発サーバーを起動 |
-| `npm run build` | 本番用ファイルを`dist/`へ生成 |
-| `npm run preview` | 本番ビルドをローカルで確認 |
-| `npm test` | 確率計算とゲームデータのテストを実行 |
-| `npm run lint` | OxlintとESLintを非修正モードで実行 |
-| `npm run lint:fix` | OxlintとESLintで修正可能な問題を自動修正 |
-| `npm run format` | `src/`をPrettierで整形 |
-| `npm run format:check` | `src/`がPrettierに準拠しているか確認 |
+| コマンド               | 内容                                     |
+| ---------------------- | ---------------------------------------- |
+| `npm run dev`          | 開発サーバーを起動                       |
+| `npm run build`        | 本番用ファイルを`dist/`へ生成            |
+| `npm run preview`      | 本番ビルドをローカルで確認               |
+| `npm test`             | 確率計算とゲームデータのテストを実行     |
+| `npm run lint`         | OxlintとESLintを非修正モードで実行       |
+| `npm run lint:fix`     | OxlintとESLintで修正可能な問題を自動修正 |
+| `npm run format`       | `src/`をPrettierで整形                   |
+| `npm run format:check` | `src/`がPrettierに準拠しているか確認     |
 
 push前の確認には次の3コマンドを実行してください。
 
@@ -105,6 +105,7 @@ purakoro_calculator/
 │   │   ├── EnergySelect.vue        # 色付きエネルギー選択メニュー
 │   │   ├── LegalFooter.vue         # 利用規約・プライバシー・免責事項
 │   │   ├── MoveCardGrid.vue        # ワザカード候補一覧
+│   │   ├── MoveSelector.vue        # ワザカード4枠の選択状態と候補表示
 │   │   ├── MoveTextCard.vue        # 画像を使わないワザカード表示
 │   │   └── ProbabilityTable.vue    # ワザ成功率の表
 │   ├── data/
@@ -112,6 +113,8 @@ purakoro_calculator/
 │   │   ├── moveEffects.json         # 基本効果・向き別キャラコロ効果
 │   │   └── gameData.test.js        # ゲームデータのテスト
 │   ├── utils/
+│   │   ├── energy.js               # エネルギーの色と表示用変換
+│   │   ├── moves.js                # ワザ効果に関する判定
 │   │   ├── probability.js          # UIに依存しない確率計算ロジック
 │   │   └── probability.test.js     # 確率計算ロジックのテスト
 │   ├── App.vue                     # ページ全体とアコーディオン一覧
@@ -127,8 +130,9 @@ purakoro_calculator/
 App
 ├── CharacterAccordion × キャラクター数
 │   ├── MoveTextCard × 選択枠
-│   ├── MoveCardGrid
-│   │   └── MoveTextCard × ワザ候補
+│   ├── MoveSelector
+│   │   └── MoveCardGrid
+│   │       └── MoveTextCard × ワザ候補
 │   ├── EnergyCustomizer
 │   │   └── EnergySelect × 18面
 │   └── ProbabilityTable
@@ -150,9 +154,9 @@ App
 
 確率計算自体はコンポーネント内へ記述せず、`src/utils/probability.js`を呼び出します。
 
-### `MoveCardGrid.vue`
+### `MoveSelector.vue` / `MoveCardGrid.vue`
 
-ワザカードの候補一覧を表示します。PC版とスマートフォン版の両方から利用し、同じワザを複数の枠へ設定できないよう制御します。
+`MoveSelector.vue`が4つの選択枠と開いている候補一覧を管理し、`MoveCardGrid.vue`が候補を表示します。同じワザを複数の枠へ設定した場合は、重複している枠と警告を表示します。
 
 ### `MoveTextCard.vue`
 
@@ -212,7 +216,7 @@ App
 複合エネルギーの面はスラッシュ区切りです。
 
 ```js
-['草', '草', '草', '草/草', '草/悪', '悪']
+;['草', '草', '草', '草/草', '草/悪', '悪']
 ```
 
 ## 確率計算の概要
@@ -229,18 +233,17 @@ App
 
 エネコロ構成は次のルールで計算します。
 
-| 個数 | 構成候補 |
-| --- | --- |
-| 1個 | A、B、C |
-| 2個 | AB、AC、BC |
-| 3個 | ABC |
-| 4個 | ABCA、ABCB、ABCC |
-| 5個 | ABCAB、ABCAC、ABCBC |
+| 個数 | 構成候補            |
+| ---- | ------------------- |
+| 1個  | A、B、C             |
+| 2個  | AB、AC、BC          |
+| 3個  | ABC                 |
+| 4個  | ABCA、ABCB、ABCC    |
+| 5個  | ABCAB、ABCAC、ABCBC |
 
 ## レスポンシブデザイン
 
-- スマートフォンではワザ選択枠を1列で表示
-- `sm`以上では2列、`lg`以上では4列で表示
+- スマートフォンと`sm`以上ではワザ選択枠を2列、`lg`以上では4列で表示
 - ワザ候補一覧はスマートフォンで1列、画面幅に応じて2〜3列表示
 - エネコロは画面幅にかかわらず3行×6列を維持
 - 成功率表はスマートフォンで横スクロールに対応

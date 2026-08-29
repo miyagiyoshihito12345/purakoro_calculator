@@ -37,3 +37,13 @@ test('maximum calculation returns only the probability', () => {
   assert.equal(typeof result, 'number')
   assert.equal(Number(result.toFixed(6)), 0.991512)
 })
+
+test('five dice can add two copies of the same energy coro', () => {
+  const coros = [
+    ['草', '草', '草', '炎', '炎', '炎'],
+    ['炎', '炎', '炎', '炎', '炎', '炎'],
+    ['炎', '炎', '炎', '炎', '炎', '炎'],
+  ]
+
+  assert.equal(maxSuccessProbability(coros, ['草', '草', '草'], 5), 1 / 8)
+})

@@ -3,11 +3,12 @@ import MoveTextCard from './MoveTextCard.vue'
 
 defineProps({
   moves: { type: Array, required: true },
-  moveSlots: { type: Array, required: true },
-  slotIndex: { type: Number, required: true },
+  selectedMoveId: { type: String, default: null },
   desktop: Boolean,
 })
-defineEmits(['select'])
+defineEmits({
+  select: (moveId) => typeof moveId === 'string',
+})
 </script>
 
 <template>
@@ -16,19 +17,18 @@ defineEmits(['select'])
     <button
       v-for="move in moves"
       :key="move.id"
-      class="relative overflow-hidden rounded-lg border-2 bg-white text-left transition disabled:cursor-not-allowed disabled:opacity-35"
+      class="relative overflow-hidden rounded-lg border-2 bg-white text-left transition"
       :class="
-        moveSlots[slotIndex] === move.id
+        selectedMoveId === move.id
           ? 'border-[#2563a6] ring-2 ring-blue-100'
           : 'border-slate-200 hover:border-blue-300'
       "
       type="button"
-      :disabled="moveSlots.includes(move.id) && moveSlots[slotIndex] !== move.id"
       @click="$emit('select', move.id)"
     >
       <span
-        v-if="moveSlots[slotIndex] === move.id"
-        class="absolute right-1 top-1 z-10 grid size-5 place-items-center rounded-full bg-[#2563a6] text-xs font-black text-white"
+        v-if="selectedMoveId === move.id"
+        class="absolute bottom-1 right-1 z-10 grid size-5 place-items-center rounded-full bg-[#2563a6] text-xs font-black text-white"
         >✓</span
       >
       <MoveTextCard :move="move" />
