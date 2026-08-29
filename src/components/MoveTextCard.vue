@@ -50,7 +50,7 @@ defineProps({
     <span
       v-if="move.baseEffect"
       class="block font-bold text-slate-600"
-      :class="compact ? 'text-[10px] leading-4' : 'text-[11px] leading-5'"
+      :class="compact ? 'text-[7px] leading-[10px]' : 'text-[11px] leading-5'"
     >
       {{ move.baseEffect }}
     </span>
