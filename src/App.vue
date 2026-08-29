@@ -4,11 +4,17 @@ import BrandMark from './components/BrandMark.vue'
 import CharacterAccordion from './components/CharacterAccordion.vue'
 import LegalFooter from './components/LegalFooter.vue'
 import { calculatorCharacters } from './data/gameData'
+import { trackCalculatorInteraction } from './utils/analytics'
 
 const openCharacterId = ref(null)
 
 function toggleCharacter(id) {
-  openCharacterId.value = openCharacterId.value === id ? null : id
+  const willOpen = openCharacterId.value !== id
+  openCharacterId.value = willOpen ? id : null
+
+  if (willOpen) {
+    trackCalculatorInteraction('character_opened', { character_id: id })
+  }
 }
 </script>
 
