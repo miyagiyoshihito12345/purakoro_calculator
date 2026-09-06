@@ -1,10 +1,10 @@
 <script setup>
 import {
-  aFaceEnergyOptions,
-  bFaceEnergyOptions,
-  doubleEnergyFaceOptions,
-  singleEnergyFaceOptions,
-} from '../data/gameData'
+  A_FACE_ENERGY_OPTIONS,
+  B_FACE_ENERGY_OPTIONS,
+  DOUBLE_ENERGY_FACE_OPTIONS,
+  ENERGY_TYPES,
+} from '../domain/gameRules'
 import EnergySelect from './EnergySelect.vue'
 
 defineProps({ energyCoros: { type: Array, required: true } })
@@ -16,10 +16,10 @@ defineEmits({
 const faceLabels = ['A面(凸)', '', '', '', '', 'B面(凹)']
 
 function optionsForFace(faceIndex) {
-  if (faceIndex === 0) return aFaceEnergyOptions
-  if (faceIndex === 3 || faceIndex === 4) return doubleEnergyFaceOptions
-  if (faceIndex === 5) return bFaceEnergyOptions
-  return singleEnergyFaceOptions
+  if (faceIndex === 0) return A_FACE_ENERGY_OPTIONS
+  if (faceIndex === 3 || faceIndex === 4) return DOUBLE_ENERGY_FACE_OPTIONS
+  if (faceIndex === 5) return B_FACE_ENERGY_OPTIONS
+  return ENERGY_TYPES
 }
 </script>
 

@@ -1,5 +1,11 @@
-export const ENERGY_TYPES = ['炎', '鋼', '雷', '草', '悪', '水', '闘', '空', '超']
-export const REQUIRED_ENERGY_TYPES = [...ENERGY_TYPES, '無']
+import {
+  ENERGY_CORO_COUNT,
+  ENERGY_FACES_PER_CORO,
+  ENERGY_TYPES,
+  MAX_ENERGY_CORO_COUNT,
+  REQUIRED_ENERGY_TYPES,
+  PROBABILITY_MODES,
+} from '../domain/gameRules.js'
 
 function combinations(items, count) {
   if (count === 0) return [[]]
@@ -24,13 +30,13 @@ function combinationsWithReplacement(items, count, startIndex = 0) {
 }
 
 export function validateEnergyCoros(energyCoros) {
-  if (!Array.isArray(energyCoros) || energyCoros.length !== 3) {
-    throw new TypeError('energyCoros must contain exactly 3 coros')
+  if (!Array.isArray(energyCoros) || energyCoros.length !== ENERGY_CORO_COUNT) {
+    throw new TypeError(`energyCoros must contain exactly ${ENERGY_CORO_COUNT} coros`)
   }
 
   energyCoros.forEach((energyCoro) => {
-    if (!Array.isArray(energyCoro) || energyCoro.length !== 6) {
-      throw new TypeError('each energyCoro must contain exactly 6 faces')
+    if (!Array.isArray(energyCoro) || energyCoro.length !== ENERGY_FACES_PER_CORO) {
+      throw new TypeError(`each energyCoro must contain exactly ${ENERGY_FACES_PER_CORO} faces`)
     }
 
     energyCoro.forEach((face) => {
@@ -87,8 +93,8 @@ export function successProbabilityForCoros(energyCoros, requiredEnergies) {
 }
 
 export function maxSuccessProbability(energyCoros, requiredEnergies, diceCount) {
-  if (!Number.isInteger(diceCount) || diceCount < 1 || diceCount > 5) {
-    throw new RangeError('diceCount must be between 1 and 5')
+  if (!Number.isInteger(diceCount) || diceCount < 1 || diceCount > MAX_ENERGY_CORO_COUNT) {
+    throw new RangeError(`diceCount must be between 1 and ${MAX_ENERGY_CORO_COUNT}`)
   }
 
   const coroCombinations =
@@ -105,14 +111,39 @@ export function maxSuccessProbability(energyCoros, requiredEnergies, diceCount) 
   )
 }
 
-export function successProbabilities(energyCoros, requiredEnergies, maxDiceCount = 5) {
+export function successProbabilities(
+  energyCoros,
+  requiredEnergies,
+  maxDiceCount = MAX_ENERGY_CORO_COUNT,
+) {
   validateEnergyCoros(energyCoros)
   validateRequiredEnergies(requiredEnergies)
-  if (!Number.isInteger(maxDiceCount) || maxDiceCount < 1 || maxDiceCount > 5) {
-    throw new RangeError('maxDiceCount must be between 1 and 5')
+  if (!Number.isInteger(maxDiceCount) || maxDiceCount < 1 || maxDiceCount > MAX_ENERGY_CORO_COUNT) {
+    throw new RangeError(`maxDiceCount must be between 1 and ${MAX_ENERGY_CORO_COUNT}`)
   }
 
   return Array.from({ length: maxDiceCount }, (_, index) =>
     maxSuccessProbability(energyCoros, requiredEnergies, index + 1),
   )
+}
+
+export function coroSuccessProbability(move) {
+  const successfulDirections = new Set(move.successDirections ?? [])
+
+  return successfulDirections.size / ENERGY_FACES_PER_CORO
+}
+
+export function probabilityForMode(energyProbability, move, mode) {
+  const coroProbability = coroSuccessProbability(move)
+
+  switch (mode) {
+    case PROBABILITY_MODES.ENERGY_SUCCESS:
+      return energyProbability
+    case PROBABILITY_MODES.BOTH_SUCCESS:
+      return energyProbability * coroProbability
+    case PROBABILITY_MODES.CORO_FAILURE:
+      return energyProbability * (1 - coroProbability)
+    default:
+      throw new RangeError(`unknown probability mode: ${mode}`)
+  }
 }

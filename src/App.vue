@@ -42,6 +42,9 @@ function toggleCharacter(id) {
           <p class="mb-2 text-sm font-black tracking-[0.18em] text-[#168467]">PLAKORO CALCULATOR</p>
           <h1 class="text-4xl font-black tracking-tight sm:text-6xl">プラコロ電卓</h1>
           <p class="mt-3 text-lg font-bold sm:text-2xl">非公式のワザ成功確率計算ツール</p>
+          <p class="mt-2 text-xs font-bold text-slate-600 sm:text-sm">
+            エネコロ、キャラコロ共に各面が出る確率は6分の1として計算しています。
+          </p>
         </div>
       </section>
 

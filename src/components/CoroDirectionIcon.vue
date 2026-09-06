@@ -19,10 +19,10 @@ const label = computed(() => labels[props.direction] ?? props.direction)
 
 const responsiveSizeClass = computed(() => {
   if (props.compact) {
-    return ['size-4', 'sm:size-5', 'md:size-5', 'lg:size-6']
+    return ['size-3.5', 'sm:size-5', 'md:size-5', 'lg:size-6']
   }
 
-  return ['size-5', 'sm:size-5', 'md:size-6', 'lg:size-7']
+  return ['size-4', 'sm:size-5', 'md:size-6', 'lg:size-7']
 })
 
 const directionTransform = computed(() => {

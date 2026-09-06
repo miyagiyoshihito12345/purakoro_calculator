@@ -1,8 +1,7 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
+import { useCharacterCalculator } from '../composables/useCharacterCalculator'
 import { trackCalculatorInteraction } from '../utils/analytics'
-import { successProbabilities } from '../utils/probability'
-import { nextTurnEnergyCoroIncrease } from '../utils/moves'
 import EnergyCustomizer from './EnergyCustomizer.vue'
 import MoveSelector from './MoveSelector.vue'
 import ProbabilityTable from './ProbabilityTable.vue'
@@ -13,23 +12,8 @@ const props = defineProps({
 })
 const emit = defineEmits(['toggle'])
 
-const moveSlots = ref(props.character.moves.slice(0, 4).map((move) => move.id))
-const energyCoros = ref(structuredClone(props.character.energyCoros))
-
-const movesById = computed(() => new Map(props.character.moves.map((move) => [move.id, move])))
-const selectedMoves = computed(() =>
-  moveSlots.value.map((id) => movesById.value.get(id)).filter(Boolean),
-)
-const maxDiceCount = computed(() =>
-  Math.min(3 + Math.max(...selectedMoves.value.map(nextTurnEnergyCoroIncrease), 0), 5),
-)
-const results = computed(() => {
-  if (selectedMoves.value.length !== 4) return null
-  return selectedMoves.value.map((move) => ({
-    move,
-    probabilities: successProbabilities(energyCoros.value, move.required, 5),
-  }))
-})
+const { energyCoros, maxDiceCount, moveSlots, probabilityMode, results, setEnergyFace } =
+  useCharacterCalculator(() => props.character)
 
 const badgeClassFor = (type) =>
   ({
@@ -49,13 +33,7 @@ const typeBadgeClass = computed(() => badgeClassFor(props.character.type))
 const weaknessBadgeClass = computed(() => badgeClassFor(props.character.weakness))
 
 function updateFace(coroIndex, faceIndex, value) {
-  energyCoros.value = energyCoros.value.map((coro, index) => {
-    if (index !== coroIndex) return coro
-
-    const nextCoro = [...coro]
-    nextCoro[faceIndex] = value
-    return nextCoro
-  })
+  setEnergyFace(coroIndex, faceIndex, value)
 
   trackCalculatorInteraction('energy_changed', {
     character_id: props.character.id,
@@ -119,7 +97,11 @@ function updateFace(coroIndex, faceIndex, value) {
 
         <EnergyCustomizer :energy-coros="energyCoros" @update-face="updateFace" />
 
-        <ProbabilityTable :results="results" :max-dice-count="maxDiceCount" />
+        <ProbabilityTable
+          v-model="probabilityMode"
+          :results="results"
+          :max-dice-count="maxDiceCount"
+        />
       </div>
     </Transition>
   </article>

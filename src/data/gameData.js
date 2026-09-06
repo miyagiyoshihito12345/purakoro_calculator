@@ -1,4 +1,11 @@
 import moveEffects from './moveEffects.json' with { type: 'json' }
+import {
+  A_FACE_ENERGY_OPTIONS,
+  B_FACE_ENERGY_OPTIONS,
+  DOUBLE_ENERGY_FACE_OPTIONS,
+  ENERGY_CORO_COUNT,
+  ENERGY_TYPES,
+} from '../domain/gameRules.js'
 
 export const bulbasaurMoves = [
   {
@@ -45,30 +52,10 @@ export const bulbasaurMoves = [
   },
 ]
 
-export const singleEnergyFaceOptions = ['炎', '鋼', '雷', '草', '悪', '水', '闘', '空', '超']
-
-export const aFaceEnergyOptions = ['炎', '鋼', '水', '草', '雷']
-
-export const bFaceEnergyOptions = ['悪', '闘', '空', '超']
-
-export const doubleEnergyFaceOptions = [
-  '炎/炎',
-  '水/水',
-  '草/草',
-  '雷/雷',
-  '闘/闘',
-  '空/空',
-  '悪/悪',
-  '超/超',
-  '超/空',
-  '悪/空',
-  '炎/雷',
-  '水/闘',
-  '草/悪',
-  '雷/鋼',
-  '炎/鋼',
-  '超/悪',
-]
+export const singleEnergyFaceOptions = ENERGY_TYPES
+export const aFaceEnergyOptions = A_FACE_ENERGY_OPTIONS
+export const bFaceEnergyOptions = B_FACE_ENERGY_OPTIONS
+export const doubleEnergyFaceOptions = DOUBLE_ENERGY_FACE_OPTIONS
 
 export const initialEnergyCoros = [
   ['草', '草', '草', '草/草', '草/草', '悪'],
@@ -284,6 +271,57 @@ const extraCharacters = [
       ['eb01-01-10', 'いやがらせベノム', ['悪', '悪', '悪', '悪'], 20],
     ],
   },
+  {
+    id: 'gengar',
+    name: 'ゲンガー',
+    type: '悪',
+    weakness: '超',
+    hp: 120,
+    energyTarget: '悪',
+    moves: [
+      ['st07-01-01', 'ガスでつつむ', ['悪'], 10],
+      ['st07-01-02', 'ホロウショット', ['悪', '悪'], 20],
+      ['st07-01-03', 'まっさかさま', ['悪', '悪'], 20],
+      ['st07-01-04', 'かげしばり', ['悪', '悪', '悪'], 30],
+      ['st07-01-05', 'ヘドロばくだん', ['悪', '悪', '悪'], 30],
+      ['st07-01-06', 'ファントムトリック', ['悪', '悪', '悪', '悪'], 10],
+      ['st07-01-07', 'サイコウェーブ', ['超', '無', '無', '無'], 30],
+    ],
+  },
+  {
+    id: 'metagross',
+    name: 'メタグロス',
+    type: '鋼',
+    weakness: '炎',
+    hp: 120,
+    energyTarget: '鋼',
+    moves: [
+      ['st08-01-01', 'ビーム', ['鋼'], 10],
+      ['st08-01-02', 'しそくえんざん', ['鋼', '鋼'], 20],
+      ['st08-01-03', 'ワイドプレス', ['鋼', '鋼'], 20],
+      ['st08-01-04', 'ストレートスタンプ', ['鋼', '鋼', '鋼'], 30],
+      ['st08-01-05', 'コメットパンチ', ['鋼', '鋼', '鋼'], 20],
+      ['st08-01-06', 'ヘビーボンバー', ['鋼', '鋼', '鋼', '鋼'], 40],
+      ['st08-01-07', 'だいばくはつ', ['無', '無', '無', '無', '無'], 100],
+    ],
+  },
+  {
+    id: 'lucario',
+    name: 'ルカリオ',
+    type: '闘',
+    weakness: '炎',
+    hp: 120,
+    energyTarget: '闘',
+    moves: [
+      ['st09-01-01', 'キック', ['闘'], 10],
+      ['st09-01-02', 'はっけい', ['闘', '闘'], 20],
+      ['st09-01-03', 'はどうナックル', ['闘', '闘'], 20],
+      ['st09-01-04', 'まわしげり', ['闘', '闘', '闘'], 20],
+      ['st09-01-05', 'オーラづき', ['闘', '闘', '闘'], 30],
+      ['st09-01-06', 'はどうだん', ['闘', '闘', '闘', '闘'], 40],
+      ['st09-01-07', 'メタルクロー', ['鋼', '無', '無', '無'], 30],
+    ],
+  },
 ]
 
 const defaultFacesFor = (target) => {
@@ -295,7 +333,9 @@ const defaultFacesFor = (target) => {
 
 const normalizeMoves = (character) => ({
   ...character,
-  energyCoros: Array.from({ length: 3 }, () => defaultFacesFor(character.energyTarget)),
+  energyCoros: Array.from({ length: ENERGY_CORO_COUNT }, () =>
+    defaultFacesFor(character.energyTarget),
+  ),
   moves: character.moves.map(([id, name, required, damage]) => ({
     id,
     name,
@@ -317,17 +357,10 @@ const characters = [
   ...extraCharacters.map(normalizeMoves),
 ]
 
-const normalizedMoveName = (name) => name.normalize('NFKC')
-
-const effectDataFor = (characterName, moveName) =>
-  Object.entries(moveEffects[characterName] ?? {}).find(
-    ([registeredName]) => normalizedMoveName(registeredName) === normalizedMoveName(moveName),
-  )?.[1]
-
 export const calculatorCharacters = characters.map((character) => ({
   ...character,
   moves: character.moves.map((move) => ({
     ...move,
-    ...(effectDataFor(character.name, move.name) ?? { baseEffect: '', coroEffects: [] }),
+    ...(moveEffects[move.id] ?? { baseEffect: '', coroEffects: [], successDirections: [] }),
   })),
 }))
