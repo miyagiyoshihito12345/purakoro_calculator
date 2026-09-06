@@ -19,3 +19,12 @@ test('returns the number of additional energy coros granted for the next turn', 
     チャージばさみ: 1,
   })
 })
+
+test('does not derive mechanics from display text', () => {
+  assert.equal(
+    nextTurnEnergyCoroIncrease({
+      coroEffects: [{ effect: '次の自分ターン：自分のエネコロ +5' }],
+    }),
+    0,
+  )
+})

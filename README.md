@@ -11,7 +11,7 @@
 
 ## 主な機能
 
-- 12キャラクターから計算対象を選択
+- 15キャラクターから計算対象を選択
 - キャラクターごとのワザカードを4枚選択
 - ワザ名、必要エネルギー、ダメージ、ワザ効果をテキストで表示
 - キャラコロの成功方向を独自アイコンで表示
@@ -36,6 +36,9 @@
 - サンダー
 - イワーク
 - ベトベター
+- ゲンガー
+- メタグロス
+- ルカリオ
 
 ## 技術スタック
 
@@ -76,7 +79,7 @@ npm run dev
 | `npm run format`       | `src/`をPrettierで整形                   |
 | `npm run format:check` | `src/`がPrettierに準拠しているか確認     |
 
-push前の確認には次の3コマンドを実行してください。
+push前の確認には次の4コマンドを実行してください。
 
 ```sh
 npm run lint
@@ -94,27 +97,42 @@ purakoro_calculator/
 │       └── deploy.yml              # GitHub Pagesへのデプロイ
 ├── design/                         # PC・スマートフォン版の画面設計資料
 ├── public/
-│   └── favicon.ico
+│   ├── brand-mark.svg              # ヘッダーなどで使うブランドマーク
+│   ├── favicon.ico
+│   └── ogp.png                     # SNS共有用画像
 ├── src/
 │   ├── assets/
 │   │   └── main.css                # Tailwindの読み込みと全体スタイル
 │   ├── components/
-│   │   ├── CharacterAccordion.vue  # キャラクター単位の状態管理と計算
+│   │   ├── BrandMark.vue           # ブランドマーク表示
+│   │   ├── CharacterAccordion.vue  # キャラクター単位の画面とイベント連携
 │   │   ├── CoroDirectionIcon.vue   # キャラコロの向きを表す独自アイコン
 │   │   ├── EnergyCustomizer.vue    # 3×6面のエネコロ編集画面
+│   │   ├── EnergyFaceIcon.vue      # エネコロの面を表すアイコン
+│   │   ├── EnergyIcon.vue          # 単一エネルギーのアイコン
 │   │   ├── EnergySelect.vue        # 色付きエネルギー選択メニュー
+│   │   ├── EnergySymbol.vue        # 単一・複合エネルギーの記号表示
 │   │   ├── LegalFooter.vue         # 利用規約・プライバシー・免責事項
 │   │   ├── MoveCardGrid.vue        # ワザカード候補一覧
 │   │   ├── MoveSelector.vue        # ワザカード4枠の選択状態と候補表示
 │   │   ├── MoveTextCard.vue        # 画像を使わないワザカード表示
 │   │   └── ProbabilityTable.vue    # ワザ成功率の表
+│   ├── composables/
+│   │   ├── useCharacterCalculator.js       # キャラクター別の状態と計算結果
+│   │   └── useCharacterCalculator.test.js  # composableのテスト
 │   ├── data/
 │   │   ├── gameData.js             # キャラクター・ワザ・エネコロのデータ
-│   │   ├── moveEffects.json         # 基本効果・向き別キャラコロ効果
-│   │   └── gameData.test.js        # ゲームデータのテスト
+│   │   ├── gameData.test.js        # ゲームデータのテスト
+│   │   └── moveEffects.json         # 基本効果・向き別キャラコロ効果
+│   ├── domain/
+│   │   └── gameRules.js            # エネルギーや個数などのゲーム定数
 │   ├── utils/
+│   │   ├── analytics.js            # 操作イベントの送信
+│   │   ├── analytics.test.js       # 操作イベントのテスト
 │   │   ├── energy.js               # エネルギーの色と表示用変換
+│   │   ├── energy.test.js          # エネルギー変換のテスト
 │   │   ├── moves.js                # ワザ効果に関する判定
+│   │   ├── moves.test.js           # ワザ効果判定のテスト
 │   │   ├── probability.js          # UIに依存しない確率計算ロジック
 │   │   └── probability.test.js     # 確率計算ロジックのテスト
 │   ├── App.vue                     # ページ全体とアコーディオン一覧
@@ -129,8 +147,8 @@ purakoro_calculator/
 ```text
 App
 ├── CharacterAccordion × キャラクター数
-│   ├── MoveTextCard × 選択枠
 │   ├── MoveSelector
+│   │   ├── MoveTextCard × 選択枠
 │   │   └── MoveCardGrid
 │   │       └── MoveTextCard × ワザ候補
 │   ├── EnergyCustomizer
@@ -145,14 +163,18 @@ App
 
 ### `CharacterAccordion.vue`
 
-キャラクターごとの次の状態を管理する中心コンポーネントです。
+キャラクターごとの表示をまとめ、子コンポーネントのイベントを連携するコンポーネントです。状態と確率計算は`useCharacterCalculator.js`から受け取ります。
+
+### `useCharacterCalculator.js`
+
+キャラクターごとの次の状態と計算結果を管理するcomposableです。
 
 - 選択中のワザカード4枚
-- 開いているワザ選択欄
 - 3個のエネコロ設定
 - 計算されたワザ成功率
+- 確率表示モード
 
-確率計算自体はコンポーネント内へ記述せず、`src/utils/probability.js`を呼び出します。
+確率表示モードはアコーディオンの表示領域より上位で保持するため、アコーディオンを閉じてから開き直してもリセットされません。確率計算自体はcomposable内へ記述せず、`src/utils/probability.js`を呼び出します。
 
 ### `MoveSelector.vue` / `MoveCardGrid.vue`
 
@@ -172,7 +194,7 @@ App
 
 ### `ProbabilityTable.vue`
 
-4つのワザを行、エネコロ1〜5個を列として成功確率を表示します。スマートフォンではワザ列を固定し、確率部分だけを横スクロールできます。
+4つのワザを行、エネコロ1〜5個を列として成功確率を表示します。3つの色付きボタンで「エネコロ成功」「エネコロ成功かつキャラコロ成功」「エネコロ成功かつキャラコロ失敗」を切り替えます。選択中の表示モードは`v-model`で親へ渡します。スマートフォンではワザ列を固定し、確率部分だけを横スクロールできます。
 
 ### `LegalFooter.vue`
 
@@ -233,13 +255,49 @@ App
 
 エネコロ構成は次のルールで計算します。
 
-| 個数 | 構成候補            |
-| ---- | ------------------- |
-| 1個  | A、B、C             |
-| 2個  | AB、AC、BC          |
-| 3個  | ABC                 |
-| 4個  | ABCA、ABCB、ABCC    |
-| 5個  | ABCAB、ABCAC、ABCBC |
+| 個数 | 構成候補                                 |
+| ---- | ---------------------------------------- |
+| 1個  | A、B、C                                  |
+| 2個  | AB、AC、BC                               |
+| 3個  | ABC                                      |
+| 4個  | ABCA、ABCB、ABCC                         |
+| 5個  | ABCAA、ABCAB、ABCAC、ABCBB、ABCBC、ABCCC |
+
+1〜3個ではA・B・Cから重複なしで選びます。4〜5個ではABCを1個ずつ使用したうえで、残りをA・B・Cから重複ありで選び、各構成のうち最大の成功確率を採用します。
+
+### 表示する3種類の確率
+
+成功率表の上にある3つのボタンで、次の確率を切り替えて表示します。エネコロとキャラコロは独立しており、それぞれのサイコロの各面が出る確率は`1/6`とします。
+
+#### エネコロが成功する確率(%)
+
+選択したワザの必要エネルギーを満たすエネコロの出目数を、エネコロの全出目数で割ります。複数のエネコロ構成候補がある場合は、その中で最も高い確率を表示します。
+
+```text
+エネコロ成功率 = 必要エネルギーを満たす出目数 ÷ エネコロの全出目数
+```
+
+#### エネコロ成功かつキャラコロが成功する確率(%)
+
+各ワザの`successDirections`に登録された方向が出ることをキャラコロ成功とします。同じ方向は重複して数えません。
+
+```text
+キャラコロ成功率 = successDirectionsの方向数 ÷ 6
+両方の成功率 = エネコロ成功率 × キャラコロ成功率
+```
+
+HPや前のターンなど、効果文章に書かれた発動条件は計算に含めません。相手が追加で振るキャラコロや、成功後に振り直すキャラコロも含めず、自分が最初に振る1回の方向だけを計算します。
+
+自分へのダメージ、自分のエネコロ減少および「ワザ失敗」となる方向は`successDirections`へ含めません。「そらをとぶ」のように失敗方向が記載されたワザでは、それ以外の有利な方向を成功方向として登録します。
+
+#### エネコロ成功かつキャラコロは失敗する確率(%)
+
+エネコロが成功し、キャラコロが`successDirections`以外の方向になった確率です。
+
+```text
+キャラコロ失敗率 = 1 − キャラコロ成功率
+エネコロ成功かつキャラコロ失敗率 = エネコロ成功率 × キャラコロ失敗率
+```
 
 ## レスポンシブデザイン
 
@@ -248,7 +306,7 @@ App
 - エネコロは画面幅にかかわらず3行×6列を維持
 - 成功率表はスマートフォンで横スクロールに対応
 - 成功率表のワザ列はスマートフォンで固定
-- 長いワザ名は固定列内で折り返して表示
+- 長いワザ名は固定列内で省略し、タイトル属性で全文を確認可能
 
 ## GitHub Pagesへのデプロイ
 

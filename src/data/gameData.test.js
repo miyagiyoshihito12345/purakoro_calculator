@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+import { CORO_DIRECTIONS } from '../domain/gameRules.js'
+import moveEffects from './moveEffects.json' with { type: 'json' }
 import {
   aFaceEnergyOptions,
   bFaceEnergyOptions,
@@ -20,8 +22,14 @@ test('A and B faces contain only their permitted energy types', () => {
 })
 
 test('double face options contain exactly two energies', () => {
-  assert.equal(doubleEnergyFaceOptions.length, 16)
+  assert.equal(doubleEnergyFaceOptions.length, 22)
   assert.ok(doubleEnergyFaceOptions.every((option) => option.split('/').length === 2))
+  assert.deepEqual(
+    ['鋼/鋼', '闘/鋼', '炎/空', '雷/空', '水/空', '草/闘'].filter(
+      (option) => !doubleEnergyFaceOptions.includes(option),
+    ),
+    [],
+  )
 })
 
 test('initial coros use double energies only on fourth and fifth faces', () => {
@@ -41,9 +49,9 @@ test('all Bulbasaur coros use the default grass configuration', () => {
   assert.deepEqual(initialEnergyCoros, [expected, expected, expected])
 })
 
-test('calculator contains all twelve supported characters', () => {
-  assert.equal(calculatorCharacters.length, 12)
-  assert.equal(new Set(calculatorCharacters.map((character) => character.id)).size, 12)
+test('calculator contains all fifteen supported characters', () => {
+  assert.equal(calculatorCharacters.length, 15)
+  assert.equal(new Set(calculatorCharacters.map((character) => character.id)).size, 15)
 
   calculatorCharacters.forEach((character) => {
     assert.ok(character.moves.length >= 4, `${character.name} must have at least four moves`)
@@ -68,7 +76,7 @@ test('calculator contains all twelve supported characters', () => {
 })
 
 test('all moves contain hard-coded effect and direction data', () => {
-  const directions = new Set(['stand', 'upsideDown', 'faceUp', 'faceDown', 'left', 'right'])
+  const directions = new Set(CORO_DIRECTIONS)
 
   calculatorCharacters.forEach((character) => {
     character.moves.forEach((move) => {
@@ -79,6 +87,43 @@ test('all moves contain hard-coded effect and direction data', () => {
         assert.ok(effect.directions.length > 0)
         assert.ok(effect.directions.every((direction) => directions.has(direction)))
       })
+    })
+  })
+})
+
+test('move effects are joined by unique move IDs', () => {
+  const moves = calculatorCharacters.flatMap((character) => character.moves)
+  const moveIds = moves.map((move) => move.id)
+
+  assert.equal(new Set(moveIds).size, moveIds.length)
+  moves.forEach((move) => assert.ok(Object.hasOwn(moveEffects, move.id), move.id))
+})
+
+test('structured mechanics contain valid numeric values', () => {
+  calculatorCharacters
+    .flatMap((character) => character.moves)
+    .flatMap((move) => move.coroEffects)
+    .forEach(({ mechanics }) => {
+      if (!mechanics) return
+      assert.ok(Number.isInteger(mechanics.nextTurnEnergyCoroDelta))
+    })
+})
+
+test('all moves explicitly define unique charakoro success directions', () => {
+  const validDirections = new Set(CORO_DIRECTIONS)
+
+  calculatorCharacters.forEach((character) => {
+    character.moves.forEach((move) => {
+      assert.ok(Array.isArray(move.successDirections), `${character.name} / ${move.name}`)
+      assert.equal(
+        new Set(move.successDirections).size,
+        move.successDirections.length,
+        `${character.name} / ${move.name}`,
+      )
+      assert.ok(
+        move.successDirections.every((direction) => validDirections.has(direction)),
+        `${character.name} / ${move.name}`,
+      )
     })
   })
 })
@@ -116,6 +161,7 @@ test('only text printed above the black card area is stored as an upper effect',
       'フリーザー/はねやすめ',
       'ミュウ/バリアー',
       'ミュウ/リフレクション',
+      'メタグロス/だいばくはつ',
     ].sort(),
   )
 })

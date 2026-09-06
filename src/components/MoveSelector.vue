@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue'
+import { MOVE_SLOT_COUNT } from '../domain/gameRules'
 import { trackCalculatorInteraction } from '../utils/analytics'
 import MoveCardGrid from './MoveCardGrid.vue'
 import MoveTextCard from './MoveTextCard.vue'
@@ -55,11 +56,11 @@ function selectMove(slotIndex, moveId) {
 <template>
   <section aria-labelledby="move-selector-heading">
     <h3 id="move-selector-heading" class="mb-2 text-sm font-black sm:mb-4 sm:text-2xl">
-      ワザカードを4枚選択
+      ワザカードを{{ MOVE_SLOT_COUNT }}枚選択
     </h3>
 
     <div class="relative grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4">
-      <template v-for="slotIndex in 4" :key="slotIndex">
+      <template v-for="slotIndex in MOVE_SLOT_COUNT" :key="slotIndex">
         <button
           class="relative flex min-h-20 w-full min-w-0 items-center gap-0.5 rounded-xl border-2 bg-white p-1 text-left transition-colors hover:bg-slate-50 sm:gap-1.5 sm:p-1.5"
           :class="
